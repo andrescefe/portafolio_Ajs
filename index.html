@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>Portafolio Interactivo</title>
+
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/mdr-file/mdr-file.css" rel="stylesheet">
+
+</head>
+<body id="page-top" class="index" ng-controller="controllerApp">
+
+    <div ng-include="main.html">
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Titulo</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titulo" ng-model="titulo">
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Enlace</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enlace" ng-model="enlace">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleTextarea">Descripcion</label>
+            <textarea class="form-control" id="exampleTextarea" rows="3" ng-model="descripcion"></textarea>
+        </div>
+            <div class="form-group">
+            <label for="exampleInputFile">Adjunte la imagen</label>
+            <input type="file" file-model="myFile" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" size="30">
+        </div>
+
+        <input type="button" class="btn btn-primary" ng-click="enviar()" value="Guardar">
+    </form>
+
+    <div>
+        <p ng-repeat="porta in portafolio"></p>
+        {{porta.titulo_portafolio}}
+        {{porta.link_portafolio}}
+        {{porta.descripcion.portafolio}}
+    </div>
+
+    <div ng-view>
+
+    </div>
+
+    <!--script-->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+    <script src="lib/mdr-file/mdr-file.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

@@ -13,18 +13,22 @@ require_once 'API.php';
 
 $API = new API();
 
-$postdata = file_get_contents("php:://input");
+$postdata = file_get_contents("php://input");
 
 //por metodo post, cundo se quiere registrar desde un formulario
 if (isset($postdata) || !empty($postdata)){
 
     $solicitud = json_decode($postdata);
+//    echo '<pre>';
+//    die(print_r($solicitud));
 
     if (isset($solicitud->accion) || !empty($solicitud->accion)){
 
         switch ($solicitud->accion){
             case 'd':
                 //
+                $id = (int)$solicitud->id;
+                $API->eliminar($id);
                 exit();
             case 'u':
                 //
@@ -33,22 +37,14 @@ if (isset($postdata) || !empty($postdata)){
     }
 
     $new_portafolio = array();
-    $folder = 'upload/';
 
-    $new_portafolio[0] = preg_replace('/[^a-zA-Z ]/', $solicitud->titulo);
-    $new_portafolio[1] = preg_replace('/[^a-zA-Z ]/', $solicitud->enlace);
-    $new_portafolio[2] = preg_replace('/[^a-zA-Z ]/', $solicitud->descripcion);
-    $new_portafolio[3] = 1;
-    $new_portafolio[4] = date("d-m-Y (H:i:s)");
+    $new_portafolio['titulo_portafolio'] = preg_replace('/[^a-zA-Z ]/','', $solicitud->titulo);
+    $new_portafolio['link_portafolio'] = preg_replace('/[^a-zA-Z ]/','', $solicitud->enlace);
+    $new_portafolio['descripcion_portafolio'] = preg_replace('/[^a-zA-Z ]/','', $solicitud->descripcion);
+    $new_portafolio['usuario_id'] = 1;
+    $new_portafolio['fecha_portafolio'] = date("d-m-Y (H:i:s)");
+    $new_portafolio['rutaimg_portafolio'] = 'hola.png';
 
-    if (!is_dir($folder)){
-        mkdir($folder);
-    }
-
-    if ($_FILES["file"]["error"] == UPLOAD_ERR_OK){
-        move_uploaded_file( $_FILES["file"]["tmp_name"], $folder . $_FILES['file']['name']);
-        $new_portafolio[5] = $_FILES['file']['name'];
-    }
 
     $API->insertar($new_portafolio);
     exit();

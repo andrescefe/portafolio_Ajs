@@ -15,7 +15,7 @@ class API {
             $query->execute();
             return $query->fetchAll();
 
-        }catch (\PDOException $e){
+        }catch (PDOException $e){
             print "Error!: " . $e->getMessage();
         }
     }
@@ -32,7 +32,13 @@ class API {
 
     }
 
-    public function eliminar(){
-
+    public function eliminar($id){
+        try{
+            $sql = "DELETE FROM portafolio WHERE id_portafolio = ?";
+            $query = $connection->prepare($sql);
+            $query->execute($id);
+        }catch (PDOException $err){
+            print "Error!: " . $e->getMessage();
+        }
     }
 }
