@@ -10,13 +10,13 @@ class API {
     public function obtenerTodos(){
         try {
 
-            $sql = "SELECT * from portafolio";
+            $sql = "SELECT * FROM portafolio";
             $query = $connection->prepare($sql);
             $query->execute();
             return $query->fetchAll();
 
         }catch (PDOException $e){
-            print "Error!: " . $e->getMessage();
+            echo "Error!: " . $e->getMessage();
         }
     }
 
@@ -25,7 +25,7 @@ class API {
     }
 
     public function insertar($portafolio = array()){
-        
+
     }
 
     public function actualizar(){

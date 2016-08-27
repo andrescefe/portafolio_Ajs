@@ -58,7 +58,7 @@ app.controller('controllerApp', ['$scope', 'fileUpload', '$http', function($scop
     $scope.portafolio = [ ];
 
     $scope.obtener = function () {
-        $http.get('lib/php/main.php')
+        $http.get('lib/php/main.php', {accion: 'R'})
             .success(function (data) {
                 $scope.portafolio = data;
                 console.log(data);
@@ -77,7 +77,7 @@ app.controller('controllerApp', ['$scope', 'fileUpload', '$http', function($scop
         var uploadUrl = "/fileUpload";
         fileUpload.uploadFileToUrl(file, uploadUrl);
 
-        $http.post('lib/php/main.php', {titulo: $scope.titulo, enlace: $scope.enlace, descripcion: $scope.descripcion} )
+        $http.post('lib/php/main.php', {titulo: $scope.titulo, enlace: $scope.enlace, descripcion: $scope.descripcion, accion: 'C'} )
             .success(function (data) {
                 // $scope.portafolio = data;
                 $scope.obtener();
@@ -90,7 +90,7 @@ app.controller('controllerApp', ['$scope', 'fileUpload', '$http', function($scop
         $scope.enlace = '';
         $scope.descripcion = '';
     }
-    
+
 //    funcion encargada de llamar a los servicios para enviar la imagen adjunta
 
 

@@ -64,11 +64,11 @@ class Database
             $this->_dbPassword = $config["password"];
             $this->_dbName = $config["database"];
 
-            $this->_connection = new \PDO('mysql:host='.$this->_dbHost.'; dbname='.$this->_dbName, $this->_dbUser, $this->_dbPassword);
-            $this->_connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->_connection = new PDO('mysql:host='.$this->_dbHost.'; dbname='.$this->_dbName, $this->_dbUser, $this->_dbPassword);
+            $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->_connection->exec("SET CHARACTER SET utf8");
         }
-        catch (\PDOException $e)
+        catch (PDOException $e)
         {
             print "Error!: " . $e->getMessage();
             die();
@@ -87,7 +87,7 @@ class Database
 
     public function getConfig()
     {
-        return parse_ini_file('Config/Config.ini');
+        return parse_ini_file('Config/config.ini');
     }
 
     /**
